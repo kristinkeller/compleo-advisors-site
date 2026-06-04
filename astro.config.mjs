@@ -13,13 +13,13 @@ export default defineConfig({
     sitemap({
       // The 404 page should not be indexed.
       filter: (page) => !page.includes('/404'),
-      // Reasonable defaults; tune later if needed.
       changefreq: 'monthly',
       priority: 0.7,
-      lastmod: new Date(),
-      // Boost homepage and audience pages.
+      // Boost homepage and audience pages; set lastmod per item.
       serialize(item) {
-        if (item.url === 'https://compleoadvisors.com/') {
+        const now = new Date().toISOString();
+        item.lastmod = now;
+        if (item.url === 'https://compleoadvisors.com' || item.url === 'https://compleoadvisors.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
         }
