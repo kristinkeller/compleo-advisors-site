@@ -1,0 +1,273 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+<SiteLayout title="Insights · Compleo Advisors" description={"Inside rare disease. Perspectives, conversations, and what's moving the field forward."} slug="insights" pathname="/insights" active="insights">
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner reveal">
+      <div class="hero-eyebrow">Insights</div>
+      <h1>Inside <span class="accent">rare disease</span>.</h1>
+      <p class="hero-sub">Perspectives, conversations, and what's moving the field forward.</p>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="container">
+    <article class="featured-card reveal">
+      <div class="featured-meta">
+        <div class="featured-label">Featured Piece</div>
+        <h2>The diagnostic-first approach to rare disease strategy.</h2>
+        <p class="date">Coming soon</p>
+        <p>The case for starting every engagement with a deep organizational and category diagnostic, and what gets missed when strategy work skips that step. Anchored in the Frame. Solve. Activate. methodology.</p>
+        <a href="#" class="arrow-link">Read the piece <span class="status-pill">Draft pending</span></a>
+      </div>
+      <div class="featured-visual" aria-hidden="true">
+        <div class="display-frame">
+          F<span class="num-amber">·</span>S<span class="num-amber">·</span>A
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="pov">
+  <div class="container">
+    <div class="pov-header reveal">
+      <h2>Recent and upcoming.</h2>
+      <span class="pov-count">5 pieces · curated POV library</span>
+    </div>
+
+    <div class="pov-grid">
+      <article class="pov-card reveal">
+        <div class="pov-meta"><span class="topic">Strategy</span> · <span>Methodology</span></div>
+        <h3>The diagnostic-first approach to rare disease strategy.</h3>
+        <p>The case for starting every engagement with a deep organizational and category diagnostic, and what gets missed when strategy work skips that step.</p>
+        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
+      </article>
+
+      <article class="pov-card reveal">
+        <div class="pov-meta"><span class="topic">Biotech</span> · <span>Commercial Readiness</span></div>
+        <h3>Why early-stage rare disease biotechs need to start commercial work earlier than they think.</h3>
+        <p>The window between late preclinical and early Phase 2 is where positioning, stakeholder insight, and advocacy strategy compound. Waiting until late Phase 2 leaves real value on the table.</p>
+        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
+      </article>
+
+      <article class="pov-card reveal">
+        <div class="pov-meta"><span class="topic">Partnership</span> · <span>Biotech &middot; Advocacy</span></div>
+        <h3>Designing biotech-advocacy partnerships that hold.</h3>
+        <p>Most biotech-advocacy partnerships start with goodwill and lose their shape over time. A practical framework for partnerships that protect the mission and remain durable as both organizations evolve.</p>
+        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
+      </article>
+
+      <article class="pov-card reveal">
+        <div class="pov-meta"><span class="topic">Advocacy</span> · <span>Strategy &amp; Communication</span></div>
+        <h3>What advocacy organizations gain from structured strategy.</h3>
+        <p>The relationship between urgency, trust, and community knowledge and the structured strategy work that converts those strengths into external influence.</p>
+        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
+      </article>
+
+      <article class="pov-card reveal">
+        <div class="pov-meta"><span class="topic">Pharma Services</span> · <span>Positioning</span></div>
+        <h3>Positioning in pharma marketing services: building a category voice.</h3>
+        <p>The unique positioning challenge of marketing services firms: deep expertise, hard to differentiate, hard-to-reach buyers, and the moves that compound into a defensible position.</p>
+        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="signup reveal">
+  <div class="container">
+    <div class="signup-inner">
+      <p class="eyebrow">Stay close to the work</p>
+      <h2>The next piece, when it's ready.</h2>
+      <p>I write a few of these a year, when the work surfaces something worth saying. Sign up and I'll send the next piece to your inbox.</p>
+      <form class="signup-form" id="insightsSignup">
+        <input type="email" name="email" placeholder="your@email.com" aria-label="Email" required>
+        <button type="submit" class="btn btn-primary">Sign up <span class="arrow">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Insights signup → opens user's email client with a pre-filled email to Kristin.
+  // v1 mechanism. For volume, swap action to a Formspree/MailChannels endpoint.
+  document.getElementById('insightsSignup')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value.trim();
+    if (!email) return;
+    const subject = encodeURIComponent('Insights signup');
+    const body = encodeURIComponent(
+      "Hi Kristin — please add this email to the Compleo Advisors Insights list:\n\n" +
+      "Email: " + email + "\n\n" +
+      "Sent from compleoadvisors.com/insights"
+    );
+    window.location.href = 'mailto:kristin@compleoadvisors.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+</SiteLayout>
+
+<style is:global>
+/* COMPLEO ADVISORS — INSIGHTS MOCKUP v1 (curated POV page) */
+/* tokens in global.css */
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:var(--font-stack);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--c-body);background:var(--c-white);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+img,svg{display:block;max-width:100%;}
+a{color:var(--c-charcoal);text-decoration:none;transition:color .15s ease;}
+a:hover{color:var(--c-amber);}
+h1,h2,h3,h4{font-family:var(--font-stack);color:var(--c-near-black);margin:0;line-height:var(--lh-tight);letter-spacing:-0.01em;}
+h1{font-size:var(--fs-h1-desktop);font-weight:600;letter-spacing:-0.02em;}
+h2{font-size:var(--fs-h2-desktop);font-weight:600;}
+h3{font-size:var(--fs-h3-desktop);font-weight:500;line-height:var(--lh-snug);}
+p{margin:0 0 1em;}
+p:last-child{margin-bottom:0;}
+.container{width:100%;max-width:var(--content-max);margin:0 auto;padding:0 var(--gutter);}
+.container-narrow{width:100%;max-width:var(--content-narrow);margin:0 auto;padding:0 var(--gutter);}
+section{padding:var(--section-y-desktop) 0;}
+.eyebrow{font-size:var(--fs-small);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-amber);margin:0 0 16px;}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:var(--font-stack);font-size:16px;font-weight:500;border-radius:var(--radius);border:none;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;}
+.btn-primary{background:var(--c-amber);color:var(--c-white);}
+.btn-primary:hover{background:var(--c-charcoal);color:var(--c-white);}
+.btn .arrow{display:inline-block;transition:transform .18s ease;}
+.btn:hover .arrow{transform:translateX(4px);}
+.arrow-link{display:inline-flex;align-items:center;gap:8px;font-weight:500;color:var(--c-charcoal);}
+.arrow-link::after{content:"→";transition:transform .18s ease;}
+.arrow-link:hover{color:var(--c-amber);}
+.arrow-link:hover::after{transform:translateX(4px);}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-bottom:var(--rule);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+.brand{display:flex;align-items:center;gap:12px;color:var(--c-near-black);}
+.brand-mark{width:36px;height:36px;}
+.brand-words{display:flex;flex-direction:column;line-height:1;}
+.brand-name{font-weight:600;font-size:18px;color:var(--c-charcoal);letter-spacing:-0.005em;}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;padding:0;margin:0;}
+.nav-links a{font-size:15px;font-weight:500;color:var(--c-charcoal);}
+.nav-links a.active{color:var(--c-amber);}
+.nav-cta{margin-left:10px;padding:10px 20px;background:var(--c-amber);color:var(--c-white)!important;border-radius:var(--radius);font-weight:500;}
+.nav-cta:hover{background:var(--c-charcoal);color:var(--c-white)!important;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--c-charcoal);font-size:22px;padding:8px;}
+
+/* HERO */
+.hero{position:relative;padding:84px 0 56px;overflow:hidden;}
+.hero-inner{max-width:1080px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:13px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-mid-gray);margin-bottom:32px;}
+.hero-eyebrow::before{content:"";display:inline-block;width:48px;height:2px;background:var(--c-amber);}
+.hero h1{font-size:clamp(44px,7.2vw,80px);line-height:1.04;font-weight:600;color:var(--c-near-black);margin-bottom:28px;max-width:18ch;letter-spacing:-0.025em;}
+.hero h1 .accent{color:var(--c-amber);background-image:linear-gradient(var(--c-amber),var(--c-amber));background-size:100% 6px;background-position:0 96%;background-repeat:no-repeat;padding-bottom:2px;}
+.hero-sub{font-size:clamp(19px,2vw,22px);line-height:1.5;color:var(--c-charcoal);max-width:62ch;font-weight:400;}
+
+/* FEATURED PIECE */
+.featured{padding-top:48px;padding-bottom:var(--section-y-desktop);}
+.featured-card{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--c-warm-cream);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(237,145,5,0.18);box-shadow:0 22px 44px -28px rgba(74,74,74,0.25);}
+.featured-meta{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;}
+.featured-meta .featured-label{font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-amber);margin-bottom:18px;}
+.featured-meta h2{font-size:clamp(26px,3vw,36px);font-weight:600;color:var(--c-near-black);margin-bottom:18px;line-height:1.2;letter-spacing:-0.01em;}
+.featured-meta p{font-size:17px;line-height:1.55;color:var(--c-charcoal);margin-bottom:24px;}
+.featured-meta .date{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-mid-gray);margin-bottom:20px;font-weight:600;}
+.featured-visual{position:relative;background:linear-gradient(135deg,var(--c-warm-cream) 0%,var(--c-warm-cream-2) 100%);display:flex;align-items:center;justify-content:center;padding:48px;min-height:280px;}
+.featured-visual .display-frame{position:relative;font-family:var(--font-stack);font-size:clamp(80px,10vw,140px);font-weight:600;line-height:0.9;color:var(--c-near-black);letter-spacing:-0.04em;text-align:center;}
+.featured-visual .display-frame .num-amber{color:var(--c-amber);}
+
+/* POV GRID */
+.pov{background:var(--c-light-gray);}
+.pov-header{margin-bottom:36px;display:flex;align-items:end;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.pov-header h2{margin:0;font-size:clamp(26px,2.8vw,32px);}
+.pov-header .pov-count{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-mid-gray);font-weight:600;}
+.pov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pov-card{background:var(--c-white);border:1px solid var(--c-rule-gray);border-radius:var(--radius);padding:30px 28px 28px;display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;}
+.pov-card:hover{border-color:var(--c-amber);transform:translateY(-3px);box-shadow:0 14px 32px -16px rgba(74,74,74,0.18);}
+.pov-card .pov-meta{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-mid-gray);font-weight:600;margin-bottom:14px;}
+.pov-card .pov-meta .topic{color:var(--c-amber);}
+.pov-card h3{font-size:19px;font-weight:600;line-height:1.3;color:var(--c-near-black);margin-bottom:14px;letter-spacing:-0.01em;}
+.pov-card p{font-size:15px;line-height:1.55;color:var(--c-charcoal);margin-bottom:24px;flex-grow:1;}
+.pov-card .arrow-link{font-size:14px;}
+
+/* PLACEHOLDER STATUS PILLS */
+.status-pill{display:inline-block;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-mid-gray);background:#EFE6D7;padding:4px 10px;border-radius:99px;font-weight:600;margin-left:8px;vertical-align:middle;}
+
+/* EMAIL CAPTURE */
+.signup{background:var(--c-warm-cream);text-align:center;}
+.signup-inner{max-width:680px;margin:0 auto;}
+.signup .eyebrow{text-align:center;}
+.signup h2{margin-bottom:14px;font-size:clamp(24px,2.6vw,32px);}
+.signup p{color:var(--c-charcoal);font-size:17px;margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto;}
+.signup-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.signup-form input{flex:1;min-width:240px;max-width:380px;padding:14px 18px;font-family:var(--font-stack);font-size:16px;color:var(--c-near-black);background:var(--c-white);border:1.5px solid var(--c-rule-gray);border-radius:var(--radius);transition:border-color .15s ease,box-shadow .15s ease;}
+.signup-form input::placeholder{color:var(--c-mid-gray);}
+.signup-form input:focus{outline:none;border-color:var(--c-amber);box-shadow:0 0 0 3px rgba(237,145,5,0.18);}
+
+/* FOOTER */
+.site-footer{background:var(--c-near-black);color:#B3B3B3;padding:64px 0 32px;font-size:14px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand .brand-name{color:var(--c-white);}
+.footer-tag{margin-top:16px;color:#B3B3B3;max-width:32ch;line-height:1.5;}
+.footer-col h4{font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-amber);margin-bottom:16px;}
+.footer-col ul{list-style:none;padding:0;margin:0;}
+.footer-col li{margin-bottom:10px;}
+.footer-col a{color:#B3B3B3;}
+.footer-col a:hover{color:var(--c-white);}
+.footer-bottom{border-top:1px solid #444;padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#777;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media (max-width:960px){
+  :root{--section-y-desktop:var(--section-y-mobile);}
+  body{font-size:var(--fs-body-mobile);}
+  h1{font-size:var(--fs-h1-mobile);}
+  h2{font-size:var(--fs-h2-mobile);}
+  h3{font-size:var(--fs-h3-mobile);}
+  .nav-links{display:none;}
+  .nav-toggle{display:block;}
+  .nav.open .nav-links{display:flex;flex-direction:column;align-items:flex-start;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--c-white);padding:24px var(--gutter);border-bottom:var(--rule);}
+  .hero{padding:64px 0 40px;}
+  .hero h1{font-size:38px;max-width:100%;margin-bottom:20px;}
+  .hero-sub{font-size:18px;}
+  .hero-eyebrow{margin-bottom:24px;}
+  .featured-card{grid-template-columns:1fr;}
+  .featured-meta{padding:32px 28px;}
+  .featured-visual{padding:32px;min-height:200px;}
+  .pov-grid{grid-template-columns:1fr;gap:16px;}
+  .pov-card{padding:24px 22px;}
+  .signup-form{flex-direction:column;align-items:stretch;}
+  .signup-form input,.signup-form .btn{max-width:100%;width:100%;justify-content:center;}
+  .footer-grid{grid-template-columns:1fr;gap:32px;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+}
+
+/* ─── Accessibility & Print ─── */
+.skip-link{position:absolute;top:-40px;left:0;background:var(--c-amber);color:var(--c-white);padding:10px 18px;z-index:200;text-decoration:none;border-radius:0 0 var(--radius) 0;font-weight:500;}
+.skip-link:focus{top:0;color:var(--c-white);outline:none;}
+:focus-visible{outline:2px solid var(--c-amber);outline-offset:3px;border-radius:3px;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--c-amber);outline-offset:3px;}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{transition-duration:0.001ms!important;animation-duration:0.001ms!important;animation-iteration-count:1!important;}
+  .reveal{opacity:1!important;transform:none!important;}
+}
+
+@media print{
+  *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;}
+  .site-header,.site-footer,.nav-toggle,.nav-cta,.cta-row,.btn,.hero-eyebrow::before,.amber-rule,.signup,.closing,.next,.form-section,#navToggle,.nav-links{display:none!important;}
+  body{font-size:11pt;line-height:1.45;background:#fff!important;}
+  h1{font-size:24pt;}
+  h2{font-size:18pt;}
+  h3{font-size:14pt;}
+  .container,.container-narrow,.container-reading,.hero-inner{max-width:100%!important;padding:0!important;}
+  section{padding:18pt 0!important;page-break-inside:avoid;}
+  a{color:#000!important;text-decoration:underline;}
+  a[href^="http"]:after{content:" ("attr(href)")";font-size:9pt;color:#555;}
+  .reveal{opacity:1!important;transform:none!important;}
+  .hero h1 .accent{background:none!important;padding-bottom:0!important;}
+}
+</style>

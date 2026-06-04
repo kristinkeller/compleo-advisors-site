@@ -1,0 +1,43 @@
+---
+import BrandMark from './BrandMark.astro';
+
+// Compleo Advisors company page on LinkedIn.
+const linkedInUrl = "https://www.linkedin.com/company/compleo-advisors/";
+---
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="color: var(--c-white);">
+          <BrandMark reversed={true} ariaHidden={true} />
+          <div class="brand-words">
+            <span class="brand-name">Compleo Advisors</span>
+          </div>
+        </div>
+        <p class="footer-tag">Turning rare disease promise into progress.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/insights">Insights</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:kristin@compleoadvisors.com">kristin@compleoadvisors.com</a></li>
+          <li><a href={linkedInUrl} aria-label="LinkedIn">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} Compleo Advisors, LLC</span>
+      <span>Boston, MA</span>
+    </div>
+  </div>
+</footer>

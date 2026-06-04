@@ -1,0 +1,42 @@
+---
+import BrandMark from './BrandMark.astro';
+
+interface Props {
+  active?: 'home' | 'about' | 'for-biotech' | 'for-advocacy' | 'for-pharma-marketing-services' | 'insights' | 'contact';
+}
+const { active } = Astro.props;
+
+const isActive = (key: string) => active === key;
+---
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a href="/" class="brand" aria-label="Compleo Advisors home">
+        <BrandMark />
+        <div class="brand-words">
+          <span class="brand-name">Compleo Advisors</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/about"                          class={isActive('about') ? 'active' : ''} aria-current={isActive('about') ? 'page' : undefined}>About</a></li>
+        <li><a href="/for-biotech"                    class={isActive('for-biotech') ? 'active' : ''} aria-current={isActive('for-biotech') ? 'page' : undefined}>For Biotech</a></li>
+        <li><a href="/for-advocacy"                   class={isActive('for-advocacy') ? 'active' : ''} aria-current={isActive('for-advocacy') ? 'page' : undefined}>For Advocacy</a></li>
+        <li><a href="/for-pharma-marketing-services"  class={isActive('for-pharma-marketing-services') ? 'active' : ''} aria-current={isActive('for-pharma-marketing-services') ? 'page' : undefined}>For Pharma Marketing Services</a></li>
+        <li><a href="/insights"                       class={isActive('insights') ? 'active' : ''} aria-current={isActive('insights') ? 'page' : undefined}>Insights</a></li>
+        <li><a href="/contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('primaryNav');
+  navToggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

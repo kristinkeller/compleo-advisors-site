@@ -1,0 +1,107 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+<SiteLayout title="Page not found · Compleo Advisors" description={"The page you were looking for isn't here. Find your way back to Compleo Advisors below."} slug="404" pathname="/404" noindex={true}>
+
+<div class="container">
+    <div class="error-block">
+      <div class="error-eyebrow"><span class="code">Error 404</span></div>
+      <h1>That page <span class="accent">isn't here</span>.</h1>
+      <p>The address you came in on doesn't match anything Compleo Advisors has published. The link may have changed, the page may have moved, or something earlier in the chain may have a typo.</p>
+      <div class="cta-row">
+        <a href="/" class="btn btn-primary">Back to the homepage <span class="arrow">→</span></a>
+        <a href="/contact" class="btn btn-secondary">Tell us what you were looking for <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+</SiteLayout>
+
+<style is:global>
+/* COMPLEO ADVISORS — 404 PAGE v1 */
+/* tokens in global.css */
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:var(--font-stack);font-size:17px;line-height:1.6;color:var(--c-body);background:var(--c-white);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+img,svg{display:block;max-width:100%;}
+a{color:var(--c-charcoal);text-decoration:none;transition:color .15s ease;}
+a:hover{color:var(--c-amber);}
+h1{font-family:var(--font-stack);color:var(--c-near-black);margin:0;letter-spacing:-0.025em;line-height:1.04;}
+p{margin:0 0 1em;}
+p:last-child{margin-bottom:0;}
+.container{width:100%;max-width:var(--content-max);margin:0 auto;padding:0 var(--gutter);}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:var(--font-stack);font-size:16px;font-weight:500;border-radius:var(--radius);border:none;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;}
+.btn-primary{background:var(--c-amber);color:var(--c-white);}
+.btn-primary:hover{background:var(--c-charcoal);color:var(--c-white);}
+.btn-secondary{background:transparent;color:var(--c-charcoal);border:1.5px solid var(--c-rule-gray);}
+.btn-secondary:hover{border-color:var(--c-charcoal);color:var(--c-near-black);}
+.btn .arrow{display:inline-block;transition:transform .18s ease;}
+.btn:hover .arrow{transform:translateX(4px);}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-bottom:var(--rule);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+.brand{display:flex;align-items:center;gap:12px;color:var(--c-near-black);}
+.brand-mark{width:36px;height:36px;}
+.brand-name{font-weight:600;font-size:18px;color:var(--c-charcoal);letter-spacing:-0.005em;}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;padding:0;margin:0;}
+.nav-links a{font-size:15px;font-weight:500;color:var(--c-charcoal);}
+.nav-cta{margin-left:10px;padding:10px 20px;background:var(--c-amber);color:var(--c-white)!important;border-radius:var(--radius);font-weight:500;}
+.nav-cta:hover{background:var(--c-charcoal);color:var(--c-white)!important;}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:80px 0 96px;}
+.error-block{max-width:680px;text-align:left;}
+.error-eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:13px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-mid-gray);margin-bottom:32px;}
+.error-eyebrow::before{content:"";display:inline-block;width:48px;height:2px;background:var(--c-amber);}
+.error-eyebrow .code{color:var(--c-amber);letter-spacing:0.16em;}
+.error-block h1{font-size:clamp(40px,5.6vw,64px);font-weight:600;margin-bottom:28px;max-width:18ch;}
+.error-block h1 .accent{color:var(--c-amber);background-image:linear-gradient(var(--c-amber),var(--c-amber));background-size:100% 6px;background-position:0 96%;background-repeat:no-repeat;padding-bottom:2px;}
+.error-block p{font-size:19px;line-height:1.5;color:var(--c-charcoal);margin-bottom:36px;max-width:56ch;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* FOOTER */
+.site-footer{background:var(--c-near-black);color:#B3B3B3;padding:48px 0 24px;font-size:14px;margin-top:auto;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#777;}
+
+/* RESPONSIVE */
+@media (max-width:760px){
+  .nav-links{display:none;}
+  .error-block h1{font-size:36px;max-width:100%;}
+  .error-block p{font-size:17px;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{transition:none!important;animation:none!important;}
+}
+
+/* ─── Accessibility & Print ─── */
+.skip-link{position:absolute;top:-40px;left:0;background:var(--c-amber);color:var(--c-white);padding:10px 18px;z-index:200;text-decoration:none;border-radius:0 0 var(--radius) 0;font-weight:500;}
+.skip-link:focus{top:0;color:var(--c-white);outline:none;}
+:focus-visible{outline:2px solid var(--c-amber);outline-offset:3px;border-radius:3px;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--c-amber);outline-offset:3px;}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{transition-duration:0.001ms!important;animation-duration:0.001ms!important;animation-iteration-count:1!important;}
+  .reveal{opacity:1!important;transform:none!important;}
+}
+
+@media print{
+  *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;}
+  .site-header,.site-footer,.nav-toggle,.nav-cta,.cta-row,.btn,.hero-eyebrow::before,.amber-rule,.signup,.closing,.next,.form-section,#navToggle,.nav-links{display:none!important;}
+  body{font-size:11pt;line-height:1.45;background:#fff!important;}
+  h1{font-size:24pt;}
+  h2{font-size:18pt;}
+  h3{font-size:14pt;}
+  .container,.container-narrow,.container-reading,.hero-inner{max-width:100%!important;padding:0!important;}
+  section{padding:18pt 0!important;page-break-inside:avoid;}
+  a{color:#000!important;text-decoration:underline;}
+  a[href^="http"]:after{content:" ("attr(href)")";font-size:9pt;color:#555;}
+  .reveal{opacity:1!important;transform:none!important;}
+  .hero h1 .accent{background:none!important;padding-bottom:0!important;}
+}
+</style>

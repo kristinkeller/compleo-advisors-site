@@ -1,0 +1,22 @@
+---
+interface Props {
+  size?: number;
+  reversed?: boolean;
+  ariaHidden?: boolean;
+  ariaLabel?: string;
+}
+const { size = 36, reversed = false, ariaHidden = false, ariaLabel = "Compleo Advisors mark" } = Astro.props;
+const strokeColor = reversed ? "#FFFFFF" : "#4A4A4A";
+---
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 180 180"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden={ariaHidden ? "true" : undefined}
+  aria-label={ariaHidden ? undefined : ariaLabel}
+  role={ariaHidden ? undefined : "img"}
+>
+  <path d="M 130.65,84.65 A 41,41 0 1 1 95.35,49.35" fill="none" stroke={strokeColor} stroke-width="18" stroke-linecap="round"/>
+  <circle cx="118.99" cy="61.01" r="9" fill="#ED9105"/>
+</svg>

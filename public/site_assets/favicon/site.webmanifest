@@ -1,0 +1,15 @@
+{
+  "name": "Compleo Advisors",
+  "short_name": "Compleo",
+  "description": "Rare disease strategy and creative firm. Turning rare disease promise into progress.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FEF4E5",
+  "theme_color": "#ED9105",
+  "icons": [
+    { "src": "/site_assets/favicon/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/site_assets/favicon/favicon-64.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/site_assets/favicon/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/site_assets/favicon/maskable-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

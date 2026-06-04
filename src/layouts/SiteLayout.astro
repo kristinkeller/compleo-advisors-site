@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pathname: string;
+  active?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  slug,
+  pathname,
+  active,
+  ogImage,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://compleoadvisors.com';
+const canonical = `${siteUrl}${pathname}`;
+const ogImageUrl = ogImage ?? `${siteUrl}/site_assets/og/og-${slug}.png`;
+const shortTitle = title.split(' · ')[0];
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicons & PWA -->
+  <link rel="icon" type="image/svg+xml" href="/site_assets/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/site_assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/site_assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/site_assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/site_assets/favicon/site.webmanifest" />
+  <meta name="theme-color" content="#ED9105" />
+
+  <!-- SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex,follow" />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Compleo Advisors" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`Compleo Advisors · ${shortTitle}`} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={`Compleo Advisors · ${shortTitle}`} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <SiteHeader active={active as any} />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <SiteFooter />
+
+  <script>
+    // Reveal-on-scroll animation
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    reveals.forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
