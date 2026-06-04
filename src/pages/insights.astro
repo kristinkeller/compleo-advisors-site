@@ -1,5 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
+
+const allInsights = await getCollection('insights', ({ data }) => data.status === 'published');
+const featured = allInsights.find((p) => p.data.featured) ?? allInsights[0];
+const others = allInsights
+  .filter((p) => p.slug !== featured.slug)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function splitTopic(topic: string): { primary: string; secondary?: string } {
+  const parts = topic.split(/\s*·\s*/);
+  return { primary: parts[0], secondary: parts.slice(1).join(' · ') || undefined };
+}
+
+const featuredTopic = splitTopic(featured.data.topic);
+const featuredDate = featured.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const totalCount = allInsights.length;
 ---
 <SiteLayout title="Insights · Compleo Advisors" description={"Inside rare disease. Perspectives, conversations, and what's moving the field forward."} slug="insights" pathname="/insights" active="insights">
 
@@ -17,11 +33,11 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <div class="container">
     <article class="featured-card reveal">
       <div class="featured-meta">
-        <div class="featured-label">Featured Piece</div>
-        <h2>The diagnostic-first approach to rare disease strategy.</h2>
-        <p class="date">Coming soon</p>
-        <p>The case for starting every engagement with a deep organizational and category diagnostic, and what gets missed when strategy work skips that step. Anchored in the Frame. Solve. Activate. methodology.</p>
-        <a href="#" class="arrow-link">Read the piece <span class="status-pill">Draft pending</span></a>
+        <div class="featured-label">Featured</div>
+        <h2>{featured.data.title}</h2>
+        <p class="date">{featuredDate}</p>
+        <p>{featured.data.subtitle}</p>
+        <a href={`/insights/${featured.slug}`} class="arrow-link">Read the piece</a>
       </div>
       <div class="featured-visual" aria-hidden="true">
         <div class="display-frame">
@@ -35,45 +51,24 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 <section class="pov">
   <div class="container">
     <div class="pov-header reveal">
-      <h2>Recent and upcoming.</h2>
-      <span class="pov-count">5 pieces · curated POV library</span>
+      <h2>Recent perspectives.</h2>
+      <span class="pov-count">{totalCount} pieces · curated POV library</span>
     </div>
 
     <div class="pov-grid">
-      <article class="pov-card reveal">
-        <div class="pov-meta"><span class="topic">Strategy</span> · <span>Methodology</span></div>
-        <h3>The diagnostic-first approach to rare disease strategy.</h3>
-        <p>The case for starting every engagement with a deep organizational and category diagnostic, and what gets missed when strategy work skips that step.</p>
-        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
-      </article>
-
-      <article class="pov-card reveal">
-        <div class="pov-meta"><span class="topic">Biotech</span> · <span>Commercial Readiness</span></div>
-        <h3>Why early-stage rare disease biotechs need to start commercial work earlier than they think.</h3>
-        <p>The window between late preclinical and early Phase 2 is where positioning, stakeholder insight, and advocacy strategy compound. Waiting until late Phase 2 leaves real value on the table.</p>
-        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
-      </article>
-
-      <article class="pov-card reveal">
-        <div class="pov-meta"><span class="topic">Partnership</span> · <span>Biotech &middot; Advocacy</span></div>
-        <h3>Designing biotech-advocacy partnerships that hold.</h3>
-        <p>Most biotech-advocacy partnerships start with goodwill and lose their shape over time. A practical framework for partnerships that protect the mission and remain durable as both organizations evolve.</p>
-        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
-      </article>
-
-      <article class="pov-card reveal">
-        <div class="pov-meta"><span class="topic">Advocacy</span> · <span>Strategy &amp; Communication</span></div>
-        <h3>What advocacy organizations gain from structured strategy.</h3>
-        <p>The relationship between urgency, trust, and community knowledge and the structured strategy work that converts those strengths into external influence.</p>
-        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
-      </article>
-
-      <article class="pov-card reveal">
-        <div class="pov-meta"><span class="topic">Pharma Services</span> · <span>Positioning</span></div>
-        <h3>Positioning in pharma marketing services: building a category voice.</h3>
-        <p>The unique positioning challenge of marketing services firms: deep expertise, hard to differentiate, hard-to-reach buyers, and the moves that compound into a defensible position.</p>
-        <a href="#" class="arrow-link">Read <span class="status-pill">Draft pending</span></a>
-      </article>
+      {others.map((piece) => {
+        const t = splitTopic(piece.data.topic);
+        return (
+          <article class="pov-card reveal">
+            <div class="pov-meta">
+              <span class="topic">{t.primary}</span>{t.secondary ? <> · <span>{t.secondary}</span></> : null}
+            </div>
+            <h3>{piece.data.title}</h3>
+            <p>{piece.data.subtitle}</p>
+            <a href={`/insights/${piece.slug}`} class="arrow-link">Read the piece</a>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>

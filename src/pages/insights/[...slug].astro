@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('insights', ({ data }) => data.status === 'published');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, subtitle, author, date, topic } = entry.data;
+const slug = entry.slug;
+const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const pageTitle = `${title} · Compleo Advisors`;
+const description = subtitle;
+---
+<SiteLayout
+  title={pageTitle}
+  description={description}
+  slug="insights"
+  pathname={`/insights/${slug}`}
+  active="insights"
+>
+
+<article class="insight-article">
+
+  <section class="article-hero">
+    <div class="container container-reading">
+      <div class="reveal">
+        <p class="article-topic">{topic}</p>
+        <h1>{title}</h1>
+        <p class="article-subtitle">{subtitle}</p>
+        <p class="article-byline">By {author} · {formattedDate}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-body">
+    <div class="container container-reading">
+      <div class="article-prose reveal">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <section class="article-foot">
+    <div class="container container-reading">
+      <a href="/insights" class="back-link">← Back to Insights</a>
+    </div>
+  </section>
+
+</article>
+
+</SiteLayout>
+
+<style is:global>
+.container-reading { max-width: 760px; margin: 0 auto; padding: 0 var(--gutter); }
+
+.article-hero { padding: 84px 0 36px; border-bottom: 1px solid var(--c-rule-gray); }
+.article-topic { font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-amber); margin: 0 0 22px; }
+.article-hero h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; color: var(--c-near-black); margin: 0 0 22px; }
+.article-subtitle { font-size: clamp(19px, 2.2vw, 22px); line-height: 1.5; color: var(--c-charcoal); margin: 0 0 28px; font-weight: 400; }
+.article-byline { font-size: 14px; color: var(--c-mid-gray); margin: 0; letter-spacing: 0.04em; }
+
+.article-body { padding: 56px 0 72px; }
+.article-prose { font-size: 18px; line-height: 1.7; color: var(--c-body); }
+.article-prose p { margin: 0 0 1.3em; }
+.article-prose h2 { font-size: 26px; font-weight: 600; color: var(--c-near-black); letter-spacing: -0.01em; line-height: 1.25; margin: 2.2em 0 0.6em; }
+.article-prose h3 { font-size: 20px; font-weight: 600; color: var(--c-near-black); margin: 1.8em 0 0.4em; }
+.article-prose a { color: var(--c-charcoal); border-bottom: 1px solid var(--c-amber); text-decoration: none; transition: color .15s ease; }
+.article-prose a:hover { color: var(--c-amber); }
+.article-prose strong { font-weight: 600; color: var(--c-near-black); }
+.article-prose em { font-style: italic; }
+.article-prose blockquote { margin: 1.6em 0; padding: 6px 0 6px 22px; border-left: 3px solid var(--c-amber); color: var(--c-charcoal); font-size: 19px; line-height: 1.5; }
+.article-prose hr { margin: 2.4em 0; border: 0; border-top: 1px solid var(--c-rule-gray); }
+.article-prose ul, .article-prose ol { padding-left: 22px; margin: 0 0 1.3em; }
+.article-prose li { margin-bottom: 0.5em; }
+.article-prose code { background: var(--c-light-gray); padding: 2px 6px; border-radius: 4px; font-size: 0.92em; }
+
+.article-foot { padding: 36px 0 96px; border-top: 1px solid var(--c-rule-gray); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 500; color: var(--c-charcoal); }
+.back-link:hover { color: var(--c-amber); }
+
+@media (max-width: 760px) {
+  .article-hero { padding: 56px 0 28px; }
+  .article-hero h1 { font-size: 30px; }
+  .article-subtitle { font-size: 18px; }
+  .article-body { padding: 36px 0 56px; }
+  .article-prose { font-size: 17px; }
+  .article-prose h2 { font-size: 22px; }
+}
+</style>
