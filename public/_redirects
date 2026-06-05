@@ -1,10 +1,11 @@
 # Cloudflare Pages — Redirects
 # Send any URL that doesn't match a built page to the 404.
 
-# Legacy path redirects (if the old GoDaddy URLs need to map)
-# /our-team        /about             301
-# /services        /about             301
-# /for-advocacy-groups  /for-advocacy  301
+# Legacy GoDaddy path redirects -> new site (301 = permanent, preserves SEO)
+/our-team /about 301
+/services /about 301
+/for-advocacy-groups /for-advocacy 301
+/contact-us /contact 301
 
 # Fallback to the 404 page (Cloudflare Pages convention: 404.html in /public)
-/*    /404    404
+/* /404 404
