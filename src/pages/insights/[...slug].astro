@@ -17,6 +17,11 @@ const slug = entry.slug;
 const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const pageTitle = `${title} · Compleo Advisors`;
 const description = subtitle;
+
+const siteBase = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://compleoadvisors.com';
+const pageUrl = `${siteBase}/insights/${slug}`;
+const pdfUrl = `/insights/${slug}.pdf`;
+const emailHref = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${subtitle}\n\nRead it here: ${pageUrl}\n\n— via Compleo Advisors`)}`;
 ---
 <SiteLayout
   title={pageTitle}
@@ -49,11 +54,46 @@ const description = subtitle;
 
   <section class="article-foot">
     <div class="container container-reading">
+      <div class="article-actions" aria-label="Save or share this piece">
+        <a class="action" href={pdfUrl} download>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span>Download PDF</span>
+        </a>
+        <button class="action" type="button" id="shareBtn" data-url={pageUrl} data-title={title}>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg>
+          <span id="shareLabel">Share</span>
+        </button>
+        <a class="action" href={emailHref}>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span>Email</span>
+        </a>
+      </div>
       <a href="/insights" class="back-link">← Back to Insights</a>
     </div>
   </section>
 
 </article>
+
+<script>
+  const btn = document.getElementById('shareBtn');
+  const label = document.getElementById('shareLabel');
+  btn?.addEventListener('click', async () => {
+    const url = btn.dataset.url;
+    const title = btn.dataset.title;
+    if (navigator.share) {
+      try { await navigator.share({ title, url }); } catch (e) { /* user cancelled */ }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      const original = label.textContent;
+      label.textContent = 'Link copied';
+      setTimeout(() => { label.textContent = original; }, 1800);
+    } catch (e) {
+      window.prompt('Copy this link:', url);
+    }
+  });
+</script>
 
 </SiteLayout>
 
@@ -81,7 +121,11 @@ const description = subtitle;
 .article-prose li { margin-bottom: 0.5em; }
 .article-prose code { background: var(--c-light-gray); padding: 2px 6px; border-radius: 4px; font-size: 0.92em; }
 
-.article-foot { padding: 36px 0 96px; border-top: 1px solid var(--c-rule-gray); }
+.article-foot { padding: 32px 0 96px; border-top: 1px solid var(--c-rule-gray); }
+.article-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.action { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-stack); font-size: 14px; font-weight: 500; color: var(--c-charcoal); background: var(--c-white); border: 1.5px solid var(--c-rule-gray); border-radius: var(--radius); padding: 10px 18px; cursor: pointer; transition: border-color .18s ease, color .18s ease, background .18s ease; }
+.action svg { color: var(--c-amber); transition: color .18s ease; }
+.action:hover { border-color: var(--c-amber); color: var(--c-near-black); background: var(--c-warm-cream); }
 .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 500; color: var(--c-charcoal); }
 .back-link:hover { color: var(--c-amber); }
 
