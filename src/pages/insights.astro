@@ -15,7 +15,6 @@ function splitTopic(topic: string): { primary: string; secondary?: string } {
 
 const featuredTopic = splitTopic(featured.data.topic);
 const featuredDate = featured.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-const totalCount = allInsights.length;
 ---
 <SiteLayout title="Insights · Compleo Advisors" description={"Inside rare disease. Perspectives, conversations, and what's moving the field forward."} slug="insights" pathname="/insights" active="insights">
 
@@ -52,7 +51,6 @@ const totalCount = allInsights.length;
   <div class="container">
     <div class="pov-header reveal">
       <h2>Recent perspectives.</h2>
-      <span class="pov-count">{totalCount} pieces · curated POV library</span>
     </div>
 
     <div class="pov-grid">
